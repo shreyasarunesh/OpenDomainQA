@@ -55,7 +55,7 @@ class WriteData():
             t = str(id) + '-' + title.strip()
             temp_id_title.append(t)
 
-        with open('C:/Users/shrey/Desktop/Wiki-Search-Engine-main/output_data/english_wiki_index/id_title_map.txt', 'a', encoding= 'UTF-8') as f:
+        with open('../output_data/english_wiki_index/id_title_map.txt', 'a', encoding= 'UTF-8') as f:
             f.write('\n'.join(temp_id_title))
             f.write('\n')
 
@@ -79,7 +79,7 @@ class WriteData():
         for word, posting in tqdm(temp_index_map):
             temp_index.append(word + '-' + posting)
 
-        with open(f'C:/Users/shrey/Desktop/Wiki-Search-Engine-main/output_data/english_wiki_index/index_{num_files}.txt','w', encoding= 'UTF-8') as f:
+        with open(f'../output_data/english_wiki_index/index_{num_files}.txt','w', encoding= 'UTF-8') as f:
             f.write('\n'.join(temp_index))
 
         num_files += 1
@@ -182,7 +182,7 @@ class WriteData():
             else:
                 unique_tokens_info[token] += '-'
 
-        with open('C:/Users/shrey/Desktop/Wiki-Search-Engine-main/output_data/english_wiki_index/tokens_info.txt', 'a', encoding= 'UTF-8') as f:
+        with open('../output_data/english_wiki_index/tokens_info.txt', 'a', encoding= 'UTF-8') as f:
             f.write('\n'.join(unique_tokens_info.values()))
             f.write('\n')
 
@@ -215,7 +215,7 @@ class WriteData():
 
     def write_diff_postings(self, tag_type, final_tag, num_files_final):
 
-        with open(f'C:/Users/shrey/Desktop/Wiki-Search-Engine-main/output_data/english_wiki_index/{tag_type}_data_{str(num_files_final)}.txt', 'w', encoding= 'UTF-8') as f:
+        with open(f'../output_data/english_wiki_index/{tag_type}_data_{str(num_files_final)}.txt', 'w', encoding= 'UTF-8') as f:
             f.write('\n'.join(final_tag))
 
     '''
