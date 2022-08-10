@@ -1,3 +1,21 @@
+
+'''
+ *
+ * Name                   :   F21MP- Open Domain Question Answering (ODQA) Agent.
+ *
+ * Description            :  This class runs all the classes to implement search and ranking and
+                                returns the required results.
+
+                                1. Either takes query inputs from user or from a text file
+                                2. returns results in SQuAD evaluation format.
+ *
+ * Author                 :   Shreyas Arunesh
+ *
+ *
+ * Reference              : https://github.com/dorianbrown/rank_bm25
+'''
+
+
 import math
 import os
 from collections import Counter
@@ -16,22 +34,19 @@ import pandas as pd
 
 wiki_wiki = wikipediaapi.Wikipedia(language='en', extract_format=wikipediaapi.ExtractFormat.WIKI)
 
-def get_paragraphs( page_name):
-    r = requests.get('https://en.wikipedia.org/api/rest_v1/page/html/{0}'.format(page_name))
-    soup = bs4.BeautifulSoup(r.content, 'html.parser')
-    html_paragraphs = soup.find_all('p')
-
-    for p in html_paragraphs:
-        cleaned_text = re.sub('(\[[0-9]+\])', '', unicodedata.normalize('NFKD', p.text)).strip()
-        if cleaned_text:
-            yield cleaned_text
-
-'''
-This class runs all the classes to implement search and ranking and returns the required results.
-'''
-
 
 class RunQuery():
+    """
+        *
+        * Summary :    This is Class constructor that initialises the parameters.
+        *
+        *
+        Args:            text_pre_processor,
+                         file_traverser,
+                         ranker,
+                         query_results
+        *
+     """
 
     def __init__(self, text_pre_processor, file_traverser, ranker, query_results):
 
@@ -40,6 +55,15 @@ class RunQuery():
         self.ranker = ranker
         self.query_results = query_results
 
+    '''
+       *
+       *  Summary : This function identifies the query type either field specific or simple query. 
+       *
+       *  Args    : Param - input query
+       *
+       *  Returns : returns query type if its field specific query else returns none. 
+       *
+      '''
     def identify_query_type(self, query):
 
         field_replace_map = {
@@ -77,6 +101,17 @@ class RunQuery():
         else:
             return query, None
 
+    '''
+       *
+       *  Summary : This function takes the input query and performs 
+                    the searching and ranking functionalities to return the titles and ranks.
+       *
+       *  Args    : Param - input query and query_type
+       *
+       *  Returns : returns ranked results. 
+       *
+      '''
+
     def return_query_results(self, query, query_type):
 
         if query_type == 'field':
@@ -103,6 +138,16 @@ class RunQuery():
 
         return ranked_results
 
+    '''
+       *
+       *  Summary : This function implements the wikipedia API to extract the context of a given title. 
+       *
+       *  Args    : Param - page name: title of wikipedia api.
+       *
+       *  Returns : returns all the paragraphs of that wiki page.
+       *
+    '''
+
     def get_paragraphs(self, page_name):
 
         r = requests.get('https://en.wikipedia.org/api/rest_v1/page/html/{0}'.format(page_name))
@@ -113,6 +158,20 @@ class RunQuery():
             cleaned_text = re.sub('(\[[0-9]+\])', '', unicodedata.normalize('NFKD', p.text)).strip()
             if cleaned_text:
                 yield cleaned_text
+
+    '''
+       *
+       *  Summary : This function performs the Wikipedia search function 
+                    to get the titles, paragraphs and score from a "query input file." 
+                    performs both SSR and MSR
+                    
+                    This function performs only for simple query (One query at a time)
+       *
+       *  Args    : Param - input file name, number of article (K), number of paragraphs (N)
+       *
+       *  Returns : returns the titles, paragraphs and score written into output file
+       *
+    '''
 
     def take_input_from_file(self, file_name, num_article, num_para):
         results_file = file_name.split('.txt')[0]
@@ -179,6 +238,21 @@ class RunQuery():
             fc.close()
 
         print('Done writing results from Question file')
+
+    '''
+       *
+       *  Summary : This function performs the Wikipedia search function 
+                    to get the titles, paragraphs and score for all "SQuAD queries" 
+                    performs both SSR and MSR.
+                    
+                    Each file is given with a specific id to identify during evaluation. 
+                    This function performs only for simple query (One query at a time)
+       *
+       *  Args    : Param - input file name, number of article (K1, k2, k3), number of paragraphs (n1, n2, n3)
+       *
+       *  Returns : returns the titles, paragraphs and score written into output file in SQuAD eval format
+       *
+    '''
 
     def get_squad_predictions(self, num_article1, num_article2, num_article3, num_para1, num_para2, num_para3):
 
@@ -374,6 +448,23 @@ class RunQuery():
             'Done writing predicted contexts to files \n Finished in: {0} hrs: {1} mis: {2} sec '.format(hours, minutes,
                                                                                                          seconds))
 
+    '''
+       *
+       *  Summary : This function performs the Wikipedia search function 
+                    to get the titles, paragraphs and score for the user "specified query/ queries" 
+                    performs both SSR and MSR.
+
+                    Each file is given with a specific id to identify during evaluation. 
+                    
+                    This function performs Simple and field specific queries. 
+                    
+       *
+       *  Args    : Param - input question, num_article (K), num_para (N)
+       *
+       *  Returns : returns the titles, paragraphs and score.
+       *
+    '''
+
     def take_input_from_user(self, question, num_article, num_para):
         title_list = []
 
@@ -399,7 +490,7 @@ class RunQuery():
         for id, _ in results:
             title = self.file_traverser.title_search(id)
 
-            corpus = (list(get_paragraphs(title))[:])
+            corpus = (list(self.get_paragraphs(title))[:])
 
             if len(corpus) != 0:
 

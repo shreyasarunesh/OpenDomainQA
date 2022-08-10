@@ -38,7 +38,7 @@ class TextPreProcessor:
         self.stop_words = stop_words
     '''
      *
-     *  Summary : This function reomoves all the stopwords from the given text data by 
+     *  Summary : This function removes all the stopwords from the given text data by 
                     iterating through the stopwords file
      *
      *  Args    : Param - text_data
@@ -128,6 +128,7 @@ class TextPreProcessor:
        *  Returns : returns cleaned data removing the empty space. Ex:(' ')
        *
       '''
+
 
     def remove_special_chars(self, text_data):
 
