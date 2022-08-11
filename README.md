@@ -21,9 +21,10 @@ the algorithm that selects the best answers among the top listed Answers display
 ```bash
 __interactive__.py
 ```
-
+Example 1:
 ![Interactive Sesion-1](Images/interactive.png)
 
+Example 2:
 ![Interactive Sesion-2](Images/interactive2.png)
 
 
