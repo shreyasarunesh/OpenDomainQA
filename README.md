@@ -15,12 +15,4 @@ to scan the retrieved documents to find the answer. Lastly, the performance of b
 
 # Quick Demo of interactive Session
 
->>> Enter Query:- where is nepal Located
-> Top Predicted Answer: it is Located in the kathmandu valley, a large valley in the high plateaus in central nepal
-
-Top Predictions:
-+------+----------------------------------------------------------------------------------------------------------+--------------------+
-| Rank |                                                  Top_answers                                                 |        Top wikipedia articles         | 
-+------+----------------------------------------------------------------------------------------------------------+--------------------+
-|  1   | a computer science discipline within the fields of information retrieval and natural language processing | Question answering |   
-+------+----------------------------------------------------------------------------------------------------------+--------------------+
+![Demo of Interaction with the System](/Users/shreyasarunesh/Desktop/Screenshot 2022-08-11 at 7.29.10 pm.png)
