@@ -40,40 +40,39 @@ cd Open_Domain_Question_Answering_Agent-ODQA-; pip install -r requirements.txt;
 ```
 Open_Domain_Question_Answering_Agent-ODQA-
 ├── Retriever
-    │   ├── WikiIndexing
-        │   ├── __main__.py
-        │   ├── CreateIndex.py
-        │   ├── DataWriter.py
-        │   ├── MergeFiles.py
-        │   ├── PageProcessor.py
-        │   ├── SaxParcer.py
-        │   ├── TextPreProcessor.py           
-        ├── WikiSearching
-        │   ├── __main__.py
-        │   ├── BM25.py
-        │   ├── FileTraverser.py 
-        │   ├── QueryResults.py 
-        │   ├── RunQuery.py      
-        ├── Evaluation
-        │   ├── Evaluation.py
+         ├── WikiIndexing
+                ├── __main__.py
+                ├── CreateIndex.py
+                ├── DataWriter.py
+                ├── MergeFiles.py
+                ├── PageProcessor.py
+                ├── SaxParcer.py
+                ├── TextPreProcessor.py           
+         ├── WikiSearching
+                 ├── __main__.py
+                 ├── BM25.py
+                 ├── FileTraverser.py 
+                 ├── QueryResults.py 
+                 ├── RunQuery.py      
+        ├── Evaluation
+                 ├── Evaluation.py
 ├── Reader
-    │   ├── BERT.py
-    │   ├── DrQA.py
-    │   ├── Eval_metrics.py
-    │   ├── Preprocessing.py
+        ├── BERT.py
+        ├── DrQA.py
+        ├── Eval_metrics.py
+        ├── Preprocessing.py
 ├── Reader_model_output
-        │   ├── BERT_finetuned_model_on_SQuAD_V 1.0
-            │   ├── config.json pytorch_model.bin
-            │   ├── pytorch_model.bin
-        │   ├── BERT_finetuned_model_on_SQuAD_V 2.0
-            │   ├── config.json pytorch_model.bin
-            │   ├── pytorch_model.bin
-        │   ├── DrQA_trained_SQuAD-1.pth
-        │   ├── DrQA_trained_SQuAD-2.pthenglish_wiki_index
+        ├── BERT_finetuned_model_on_SQuAD_V 1.0
+                    ├── config.json pytorch_model.bin
+                    ├── pytorch_model.bin
+        ├── BERT_finetuned_model_on_SQuAD_V 2.0
+                    ├── config.json pytorch_model.bin
+                    ├── pytorch_model.bin
+        ├── DrQA_trained_SQuAD-1.pth
+        ├── DrQA_trained_SQuAD-2.pthenglish_wiki_index
 ├── Dataset
-        │   ├── english_wikipedia_Dump
-        │   ├── output_data
-            │   ├── english_wiki_index
-
+        ├── english_wikipedia_Dump
+        ├── output_data
+                ├── english_wiki_index
         
 ```
