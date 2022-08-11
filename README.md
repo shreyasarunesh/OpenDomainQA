@@ -48,24 +48,32 @@ Open_Domain_Question_Answering_Agent-ODQA-
         │   ├── PageProcessor.py
         │   ├── SaxParcer.py
         │   ├── TextPreProcessor.py           
-    │   ├── WikiSearching
+        ├── WikiSearching
         │   ├── __main__.py
         │   ├── BM25.py
         │   ├── FileTraverser.py 
         │   ├── QueryResults.py 
         │   ├── RunQuery.py      
-    │   ├── Evaluation
+        ├── Evaluation
         │   ├── Evaluation.py
 ├── Reader
-    │   ├── SQuAD-v1.1-<train/dev>.<txt/json>
-    │   ├── WebQuestions-<train/test>.txt
-    │   ├── freebase-entities.txt
-    │   ├── CuratedTrec-<train/test>.txt
-    │   └── WikiMovies-<train/test/entities>.txt
-    ├── reader
-    │   ├── multitask.mdl
-    │   └── single.mdl
-    └── wikipedia
-        ├── docs.db
-        └── docs-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
+    │   ├── BERT.py
+    │   ├── DrQA.py
+    │   ├── Eval_metrics.py
+    │   ├── Preprocessing.py
+├── Reader_model_output
+        │   ├── BERT_finetuned_model_on_SQuAD_V 1.0
+            │   ├── config.json pytorch_model.bin
+            │   ├── pytorch_model.bin
+        │   ├── BERT_finetuned_model_on_SQuAD_V 2.0
+            │   ├── config.json pytorch_model.bin
+            │   ├── pytorch_model.bin
+        │   ├── DrQA_trained_SQuAD-1.pth
+        │   ├── DrQA_trained_SQuAD-2.pthenglish_wiki_index
+├── Dataset
+        │   ├── english_wikipedia_Dump
+        │   ├── output_data
+            │   ├── english_wiki_index
+
+        
 ```

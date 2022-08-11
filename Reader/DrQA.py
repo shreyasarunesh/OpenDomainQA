@@ -349,7 +349,7 @@ class Evaluation():
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         model_1.to(device)
         model_DrQA.load_state_dict(torch.load('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent'
-                                              '/Reader/BERTbase/model_output/DrQA_final'))
+                                              '/Reader/BERTbase/Reader_model_output/DrQA_final'))
         model_1.eval()
 
         em, f1 = eval.evaluate(model_1, eval_dataset, BERT=False)
@@ -386,7 +386,7 @@ if __name__ == '__main__':
     formatter = logging.Formatter('%(asctime)s %(message)s')
 
     # setup train_Eval logger
-    log = setup_logger('logger', os.getcwd() + '/Reader/BERTbase/model_output/DrQA-TrainVal.log')
+    log = setup_logger('logger', os.getcwd() + '/Reader/BERTbase/Reader_model_output/DrQA-TrainVal.log')
 
     '''
       *

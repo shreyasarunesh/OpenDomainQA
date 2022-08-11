@@ -352,7 +352,7 @@ class Evaluate:
     def test(self):
         device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
         model_bert = Bert_QA.from_pretrained(
-            '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/BERTbase/model_output/bert_model_final')
+            '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/BERTbase/Reader_model_output/bert_model_final')
         model_bert.to(device)
         model_bert.eval()
         em, f1 = eval.evaluate(model_bert, val_dataset)

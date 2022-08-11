@@ -92,7 +92,7 @@ if __name__ == '__main__':
             # Load the fine-tuned model
             device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
             model_bert = Bert_QA.from_pretrained( '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent'
-                                                  '/Reader/model_output/BERT_finetuned_model')
+                                                  '/Reader/Reader_model_output/BERT_finetuned_model')
             model_bert.to(device)
             model_bert.eval()
 
@@ -178,7 +178,7 @@ if __name__ == '__main__':
 #     # Load the fine-tuned model
 #     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 #     model_bert = Bert_QA.from_pretrained(
-#         '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/model_output/BERT_finetuned_model')
+#         '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/Reader_model_output/BERT_finetuned_model')
 #     model_bert.to(device)
 #     model_bert.eval()
 #
