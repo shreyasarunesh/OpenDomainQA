@@ -173,7 +173,7 @@ class SquadDataset_val_BERT(torch.utils.data.Dataset):
 
 """
    *
-   * Summary :    This is the class for preprocessing the dataset for training and validation. 
+   * Summary :    This is the class for preprocessing the dataset for training and validation and evaluation. 
    *
 """
 
@@ -190,18 +190,20 @@ class Preprocessing:
      *  Returns : returns list of context, question and answers.
      *
     '''
-    def flatten(self, train_path, val_path, train=True):
-
-        if train:
-            f = open(train_path, 'r')
+    def flatten(self, path, mode = 'train'):
+        f = open(path, 'r')
+        if mode == "train":
             data = json.load(f)
             num_article = len(data['data'])
             temp_data = data['data'][:(9 * num_article // 10)]
-        else:
-            f = open(val_path, 'r')
+        elif mode == 'val':
             data = json.load(f)
             num_article = len(data['data'])
             temp_data = data['data'][(9 * num_article // 10):]
+        elif mode == 'eval':
+            data = json.load(f)
+            num_article = len(data['data'])
+            temp_data = data['data'][:]
 
         contexts = []
         questions = []
@@ -303,7 +305,7 @@ class Preprocessing:
     '''
      *
      *  Summary : This function is only for BERT-tokeniser to denote start and end  special tokens for a given encodings.
-                    
+                    Ex: [CLS] Sentence A [SEP] Sentence B [SEP]
      *
      *  Args    : Param- encodings, answers, max_length=512
      *
@@ -343,20 +345,28 @@ class Preprocessing:
     def main(self, BERT=True):
 
         train_path = '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/squad2.0/train-v2.0.json'
-        val_path = '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/squad2.0/dev-v2.0.json'
+        eval_path = '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/squad2.0/dev-v2.0.json'
         prepro = Preprocessing()
 
         # get training data
         print('#########Train data Preprocessing##########')
-        train_contexts, train_questions, train_answers = prepro.flatten(train_path, val_path)
+        train_contexts, train_questions, train_answers = prepro.flatten(train_path, mode = 'train')
         prepro.add_end_idx(train_answers, train_contexts)
         train_context_list, train_question_list, train_start_position, train_end_position = prepro.preprocess(
             train_contexts, train_questions, train_answers)
 
         # get validation data
         print('#########Validation data Preprocessing##########')
-        val_contexts, val_questions, val_answers = prepro.flatten(train_path, val_path, train=False)
+        val_contexts, val_questions, val_answers = prepro.flatten(train_path, mode = 'val')
         val_context_list, val_question_list = prepro.preprocess(val_contexts, val_questions, val_answers, train=False)
+
+
+        # get evaluation data
+
+        print('#########evaluation data Preprocessing##########')
+        eval_contexts, eval_questions, eval_answers = prepro.flatten(eval_path, mode = 'eval')
+        eval_context_list, eval_question_list = prepro.preprocess(eval_contexts, eval_questions, eval_answers, train=False)
+
 
         if BERT:
             max_length = 512
@@ -366,18 +376,24 @@ class Preprocessing:
 
             val_encodings = tokenizer(val_contexts, val_questions, truncation=True, padding='max_length',
                                       max_length=max_length)
+            eval_encodings = tokenizer(eval_contexts, eval_questions, truncation=True, padding='max_length',
+                                      max_length=max_length)
+
 
             train_dataset = SquadDataset_train_BERT(train_encodings)
             val_dataset = SquadDataset_val_BERT(val_encodings, val_answers)
+            eval_dataset = SquadDataset_val_BERT(eval_encodings, eval_answers)
 
-            return train_dataset, val_dataset
+            return train_dataset, val_dataset, eval_dataset
 
         else:
 
             train_dataset = SquadDataset_train_DrQA(train_context_list, train_question_list, train_start_position,
                                                     train_end_position)
 
-            val_dataset = SquadDataset_val_DrQA(val_context_list, val_question_list, val_answers )
+            val_dataset = SquadDataset_val_DrQA(val_context_list, val_question_list, val_answers)
+            eval_dataset = SquadDataset_val_DrQA(eval_context_list, eval_question_list, eval_answers)
 
-            return train_dataset, val_dataset
+
+            return train_dataset, val_dataset, eval_dataset
 

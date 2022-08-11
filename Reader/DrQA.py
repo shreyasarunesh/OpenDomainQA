@@ -1,5 +1,4 @@
 
-
 '''
  *
  * Name                   :   F21MP- Open Domain Question Answering (ODQA) Agent.
@@ -42,7 +41,8 @@ class DrQA(nn.Module):
     def __init__(self, num_layers, input_size, hidden_size, dropout=0.5):
         '''
          *
-         *  Summary : This is DrQA model constructor class.
+         *  Summary : This is DrQA model constructor class to create DrQA model consisting of 2 BiLSTM models using
+                        Pytorch.
          *
          *  Args    : Param - number of layers input size, hidden size, dropout
          *
@@ -390,7 +390,7 @@ if __name__ == '__main__':
 
     '''
       *
-      *  Summary : This block of code performs the preprocessing by calling data preprocessor classs. 
+      *  Summary : This block of code performs the preprocessing by calling data_preprocessing class. 
       *
       *
      '''
