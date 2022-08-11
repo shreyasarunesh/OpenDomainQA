@@ -28,15 +28,15 @@ Example 2:
 ![Interactive Sesion-2](Images/interactive2.png)
 
 
-## Installing
+## Installaiton 
 
-Installation of this system is simple. 
-This project requires Linux/OSX and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
+Installation is simple. This project requires Linux/OSX and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
+
 Download  SQuAD datafiles, GloVe word vectors, Transformers and other dependencies listed in requirements.txt. 
 
 CUDA is necessary to train the models.
 
-Run the following commands to clone the repository and install DrQA:
+Run the following commands to clone the repository:
 
 ```bash
 git clone git@github.com:shreyasarunesh/Open_Domain_Question_Answering_Agent-ODQA-.git
