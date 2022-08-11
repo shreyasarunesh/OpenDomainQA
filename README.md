@@ -17,15 +17,10 @@ to scan the retrieved documents to find the answer. Lastly, the performance of b
 
 >>> Enter Query:- where is nepal Located
 > Top Predicted Answer: it is Located in the kathmandu valley, a large valley in the high plateaus in central nepal
-|  Top Answers   |   Top Wikipedia Titles  |
-|-----|-----|
-| it is located in the kathmandu valley,
-a large valley in the high plateaus in central nepal    |  kingdom of nepal   |
-|  | the windswept and arid Land around lo manthang, located at an altitude between 3000m and 3500m, is not suitable for agriculture at all   |   | nepal  |
-|     |     |
-|     |     |
-|     |     |
-|     |     |
-|     |     |
-|     |     |
-|     |     |
+
+Top Predictions:
++------+----------------------------------------------------------------------------------------------------------+--------------------+
+| Rank |                                                  Top_answers                                                 |        Top wikipedia articles         | 
++------+----------------------------------------------------------------------------------------------------------+--------------------+
+|  1   | a computer science discipline within the fields of information retrieval and natural language processing | Question answering |   
++------+----------------------------------------------------------------------------------------------------------+--------------------+
