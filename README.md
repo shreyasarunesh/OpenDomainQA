@@ -31,12 +31,19 @@ Example 2:
 ## Installing
 
 Installation of this system is simple. 
+This project requires Linux/OSX and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
+Download  SQuAD datafiles, GloVe word vectors, Transformers and other dependencies listed in requirements.txt. 
+
+CUDA is necessary to train the models.
+
+Run the following commands to clone the repository and install DrQA:
 
 ```bash
 git clone git@github.com:shreyasarunesh/Open_Domain_Question_Answering_Agent-ODQA-.git
 cd Open_Domain_Question_Answering_Agent-ODQA-; pip install -r requirements.txt; 
 ```
 
+The repository looks like the bellow format. 
 ```
 Open_Domain_Question_Answering_Agent-ODQA-
 ├── Retriever
@@ -72,7 +79,10 @@ Open_Domain_Question_Answering_Agent-ODQA-
         ├── DrQA_trained_SQuAD-2.pthenglish_wiki_index
 ├── Dataset
         ├── english_wikipedia_Dump
+        ├── squad1.0
+        ├── squad2.1
         ├── output_data
                 ├── english_wiki_index
         
 ```
+
