@@ -36,3 +36,36 @@ Installation of this system is simple.
 git clone git@github.com:shreyasarunesh/Open_Domain_Question_Answering_Agent-ODQA-.git
 cd Open_Domain_Question_Answering_Agent-ODQA-; pip install -r requirements.txt; 
 ```
+
+```
+Open_Domain_Question_Answering_Agent-ODQA-
+├── Retriever
+    │   ├── WikiIndexing
+        │   ├── __main__.py
+        │   ├── CreateIndex.py
+        │   ├── DataWriter.py
+        │   ├── MergeFiles.py
+        │   ├── PageProcessor.py
+        │   ├── SaxParcer.py
+        │   ├── TextPreProcessor.py           
+    │   ├── WikiSearching
+        │   ├── __main__.py
+        │   ├── BM25.py
+        │   ├── FileTraverser.py 
+        │   ├── QueryResults.py 
+        │   ├── RunQuery.py      
+    │   ├── Evaluation
+        │   ├── Evaluation.py
+├── Reader
+    │   ├── SQuAD-v1.1-<train/dev>.<txt/json>
+    │   ├── WebQuestions-<train/test>.txt
+    │   ├── freebase-entities.txt
+    │   ├── CuratedTrec-<train/test>.txt
+    │   └── WikiMovies-<train/test/entities>.txt
+    ├── reader
+    │   ├── multitask.mdl
+    │   └── single.mdl
+    └── wikipedia
+        ├── docs.db
+        └── docs-tfidf-ngram=2-hash=16777216-tokenizer=simple.npz
+```
