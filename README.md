@@ -12,7 +12,6 @@ and machine comprehension of text (locating the answer spans from those articles
 components: (1) Information Retrieval System to extract relevant documents among the collection of more than 6 million Wikipedia articles and (2) Machine Reading Comprehension
 to scan the retrieved documents to find the answer. Lastly, the performance of both components are assessed individually using the intrinsic evaluation metrics.
 
-
 ## Quick Demo of interactive Session
 
 For interactive Session as illustrated bellow, run the __interactive__.py file. In the example, Top Predicted answer is
@@ -31,6 +30,7 @@ Example 2:
 ## Installaiton 
 
 Installation is simple. This project requires Linux/OSX and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
+The repo is tested on Python 3.10, Cuda 10.1, PyTorch 1.5.1 on Tesla P100 GPUs. Besides that, conda is recommended for convinence.
 
 Download  SQuAD datafiles, GloVe word vectors, Transformers and other dependencies listed in requirements.txt. 
 
@@ -84,5 +84,30 @@ Open_Domain_Question_Answering_Agent-ODQA-
         ├── output_data
                 ├── english_wiki_index
         
-```
+``
+
+## Results
+
+|  Models                       |    SQuAD V1.0     |     SQuAD V2.0       |
+|-------------------------------|-------------------|----------------------|
+|                               | F1-Score  | EM    | F1-Score |   EM      |
+|    DrQA Original              | 78.83     | 69.51 | --       |   --      |
+|      BiDAF                    | 81.12     | 73.31 | --       |   --      |
+|**DrQA - (This project)**      | 57.53     | 42.33 | 50.12 |   43.54      |
+|                               | F1-Score  | EM    | F1-Score  |   EM     |
+|  BERT-Serini                  | 46.1      | 38.6  | --        |   --     |
+|BERT-base-Original             | 88.50     | 81.20 | 75.73     | 72.35    |
+|BERT-large-Original            | 91.28     | 84.32 | 80.23     |   83.00  |
+| Distil-BERT-Original          | 85.8      | 77.7  | 68.1      |   64.88  |
+|   T5- base                    |  85.71    | 76.95 | 81.2      |   77.64  |
+| **BERT-base (This project)**  | 73.27     | 66.66 | 68.42     |   64.16  |
+
+
+
+
+
+
+## Authors
+
+- [@Shreyas Arunesh](https://github.com/shreyasarunesh)
 
