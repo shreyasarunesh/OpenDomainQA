@@ -1,7 +1,7 @@
 # Open_Domain_Question_Answering_Agent-ODQA-
 This repository consists of ODQA implementation used for MSc Artificial Intelligence Masters Project in Heriot-Watt-University 
 
-# Introduction
+## Introduction
 
 This is the Pytorch Re-implementation of DrQA model described in the paper: [Reading Wikipedia to Answer Open-Domain Questions](https://arxiv.org/abs/1704.00051) 
 and fine-tuning of BERT-base as described in the paper: [End-to-End Open-Domain Question Answering with BERTserini](https://arxiv.org/abs/1902.01718).
@@ -13,7 +13,7 @@ components: (1) Information Retrieval System to extract relevant documents among
 to scan the retrieved documents to find the answer. Lastly, the performance of both components are assessed individually using the intrinsic evaluation metrics.
 
 
-# Quick Demo of interactive Session
+## Quick Demo of interactive Session
 
 For interactive Session as illustrated bellow, run the __interactive__.py file. In the example, Top Predicted answer is
 the algorithm that selects the best answers among the top listed Answers displayed in the table. 
