@@ -15,4 +15,23 @@ to scan the retrieved documents to find the answer. Lastly, the performance of b
 
 # Quick Demo of interactive Session
 
-![Interactive Sesion](Images/interactive.png)
+For interactive Session as illustrated bellow, run the __interactive__.py file. In the example, Top Predicted answer is
+the algorithm that selects the best answers among the top listed Answers displayed in the table. 
+
+```bash
+__interactive.py
+```
+
+![Interactive Sesion-1](Images/interactive.png)
+
+![Interactive Sesion-2](Images/interactive1.png)
+
+
+## Installing
+
+Installation of this system is simple. 
+
+```bash
+git clone git@github.com:shreyasarunesh/Open_Domain_Question_Answering_Agent-ODQA-.git
+cd Open_Domain_Question_Answering_Agent-ODQA-; pip install -r requirements.txt; 
+```
