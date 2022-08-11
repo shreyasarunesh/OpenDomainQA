@@ -15,4 +15,4 @@ to scan the retrieved documents to find the answer. Lastly, the performance of b
 
 # Quick Demo of interactive Session
 
-![Demo of Interaction with the System](/Users/shreyasarunesh/Desktop/Screenshot 2022-08-11 at 7.29.10 pm.png)
+![](/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent-ODQA-/Images/Screenshot 2022-08-11 at 7.29.10 pm.png)
