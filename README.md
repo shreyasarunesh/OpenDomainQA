@@ -19,12 +19,12 @@ For interactive Session as illustrated bellow, run the __interactive__.py file. 
 the algorithm that selects the best answers among the top listed Answers displayed in the table. 
 
 ```bash
-__interactive.py
+__interactive__.py
 ```
 
 ![Interactive Sesion-1](Images/interactive.png)
 
-![Interactive Sesion-2](Images/interactive1.png)
+![Interactive Sesion-2](Images/interactive2.png)
 
 
 ## Installing
