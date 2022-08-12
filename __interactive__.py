@@ -4,7 +4,7 @@
  * Name                   :   F21MP- Open Domain Question Answering (ODQA) Agent.
  *
  * Description            :  This file illustrates the interactive session to get answer to Open domain questions from
-                                this project system. Just execute this file to start interacting with the file.
+                                this project system. Just execute this file to start interacting with the system.
  *
  * Author                 :   Shreyas Arunesh
  *
@@ -48,24 +48,25 @@ type3: Mixed - what is capital of scotland b:capital of scotland
 
 if __name__ == '__main__':
 
+    '''
+     *
+     *  Summary : This block loads the Search engine. It takes ~ 45 seconds for loading.
+     *
+     *
+    '''
+
     file_name = '/Retriever/Evaluation/questions'
     num_article = 10  # Value of K
-
     num_para = 20  # Number of para extracted in each page.
 
     html_tags = re.compile('&amp;|&apos;|&gt;|&lt;|&nbsp;|&quot;')
-    with open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/wikipedia/stopwords.txt',
-              'r') as f:
+    with open('../Dataset/stopwords.txt', 'r') as f:
         stop_words = [word.strip() for word in f]
 
-    with open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/wikipedia/stemwords.txt',
-              'r') as f:
+    with open('../Dataset/stemwords.txt', 'r') as f:
         stemmer = [word.strip() for word in f]
 
-    with open(
-            '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data'
-            '/english_wiki_index/num_pages.txt',
-            'r') as f:
+    with open('../Dataset/output_data/english_wiki_index/num_pages.txt','r') as f:
         num_pages = float(f.readline().strip())
 
     text_pre_processor = TextPreProcessor(html_tags, stemmer, stop_words)
@@ -74,10 +75,7 @@ if __name__ == '__main__':
     query_results = QueryResults(file_traverser)
     run_query = RunQuery(text_pre_processor, file_traverser, ranker, query_results)
 
-    temp = linecache.getline(
-        '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index'
-        '/id_title_map.txt',
-        0)
+    temp = linecache.getline('../Dataset/output_data/id_title_map.txt', 0)
 
     print('Loaded in', np.round(time.time() - s, 2), 'seconds')
 
@@ -87,22 +85,47 @@ if __name__ == '__main__':
     # run_query.get_wikiQA_predictions(num_results)
     # run_query.get_squad_predictions(num_article1,num_article2, num_article3, num_para1,num_para2, num_para3)
 
+    '''
+     *
+     *  Summary : This block takes the user open domain query and displays the top predicted answer and a table to top answers.
+     *
+     *
+    '''
+
     while True:
         question = input('Enter Query:- ')
 
-
+        '''
+             *
+             *  Summary : This function retrieves the top_K_N paragraphs for a given question.
+             *
+             *  Args    : Param - question, number of articles, number paragraphs.
+             *
+             *  Returns : lists of top titles, top paragraphs and document scores
+             *
+        '''
         def get_context(question, num_article, num_para):
             top_titles, top_para, doc_scores = run_query.take_input_from_user(question, num_article, num_para)
 
             return top_titles, top_para, doc_scores
-
+        '''
+             *
+             *  Summary : This function extracts the answer for all the retrieved paragraphs and gets the top predicted answer.
+                            
+             *
+             *  Args    : Param - question, top_titles, top_paras_list, doc_scores, weight. 
+                             Weight(μ) = 1 is the hyperparameter for fully connected system in the equation:
+                                S = (1 − μ) · SRetriever score + μ · SReader score
+             *
+             *  Returns : lists of top titles, top paragraphs and document scores
+             *
+        '''
 
         def get_answers(question, top_titles, top_paras_list, doc_scores, weight):
 
             # Load the fine-tuned model
             device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-            model_bert = Bert_QA.from_pretrained( '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent'
-                                                  '/Reader/model_output/BERT_finetuned_model')
+            model_bert = Bert_QA.from_pretrained( '../Reader_model_output/BERT_finetuned_model_on_SQuAD_V 2.0')
             model_bert.to(device)
             model_bert.eval()
 
@@ -165,13 +188,25 @@ if __name__ == '__main__':
                 print()
 
 
+        '''
+             *
+             *  Summary : This first line of code is Retriever and second line is reader that calls all
+                            the above functions to perform Open domain question answering..
+
+             *
+        '''
         top_titles, top_paras_list, doc_scores = get_context(question, num_article, num_para)
 
         get_answers(question, top_titles, top_paras_list, doc_scores, weight=1.0)
 
 
 
+'''
+     *
+     *  Summary : This block of code is to test the reader model.
 
+     *
+'''
 # """Reader Experiments"""
 #
 # from Reader.BERT import *
@@ -303,6 +338,6 @@ if __name__ == '__main__':
 #            "Can a infected person spread the virus even if they don't have symptoms?",
 #            "What do elephants eat?"
 #           ]
-#
+# top_sample_scores = [1, 3, 4]
 # get_answers(question, top_sample_contexts, top_sample_scores, weight=1.0)
 

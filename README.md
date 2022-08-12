@@ -98,7 +98,8 @@ Open_Domain_Question_Answering_Agent-ODQA-
 
 ## Results
 
-The table bellow illustrates the results of both models in this project and State-of-the-art models.
+The table bellow illustrates the results of both models (DrQA and BERT-base) in this project compared to other 
+State-of-the-art models.
 ```
 |--------------------------------------------------------------------------|
 |  Models                       |    SQuAD V1.0     |     SQuAD V2.0       |
