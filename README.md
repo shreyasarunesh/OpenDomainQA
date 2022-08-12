@@ -99,7 +99,7 @@ Open_Domain_Question_Answering_Agent-ODQA-
 ## Results
 
 The table bellow illustrates the results of both models in this project and State-of-the-art models.
-
+```
 |--------------------------------------------------------------------------|
 |  Models                       |    SQuAD V1.0     |     SQuAD V2.0       |
 |-------------------------------|-------------------|----------------------|
@@ -118,6 +118,7 @@ The table bellow illustrates the results of both models in this project and Stat
 |   T5- base                    |  85.71    | 76.95 | 81.2      |   77.64  |
 | **BERT-base (This project)**  | 73.27     | 66.66 | 68.42     |   64.16  |
 |--------------------------------------------------------------------------|
+```
 
 ## Author
 
