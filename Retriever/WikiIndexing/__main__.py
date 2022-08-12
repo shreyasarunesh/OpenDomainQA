@@ -92,66 +92,66 @@ if __name__ == '__main__':
     merge_files = MergeFiles(num_files, write_data)
     num_files_final = merge_files.merge_files()
 
-    with open('../output_data/english_wiki_index/num_pages.txt', 'w', encoding= 'UTF-8') as f:
+    with open('../Dataset/output_data/english_wiki_index/num_pages.txt', 'w', encoding= 'UTF-8') as f:
         f.write(str(num_pages))
 
     num_tokens_final = 0
-    with open('../output_data/english_wiki_index/tokens_info.txt', 'r', encoding= 'UTF-8') as f:
+    with open('../Dataset/output_data/english_wiki_index/tokens_info.txt', 'r', encoding= 'UTF-8') as f:
         for line in f:
             num_tokens_final += 1
 
-    with open('../output_data/english_wiki_index/num_tokens.txt', 'w', encoding= 'UTF-8') as f:
+    with open('../Dataset/output_data/english_wiki_index/num_tokens.txt', 'w', encoding= 'UTF-8') as f:
         f.write(str(num_tokens_final))
 
     char_list = [chr(i) for i in range(97, 123)]
     num_list = [str(i) for i in range(0, 10)]
 
-    with open(f'../output_data/english_wiki_index/tokens_info.txt', 'r', encoding= 'UTF-8') as f:
+    with open(f'../Dataset/output_data/english_wiki_index/tokens_info.txt', 'r', encoding= 'UTF-8') as f:
         for line in tqdm(f):
             if line[0] in char_list:
-                with open(f'../output_data/english_wiki_index/tokens_info_{line[0]}.txt', 'a', encoding= 'UTF-8') as t:
+                with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{line[0]}.txt', 'a', encoding= 'UTF-8') as t:
                     t.write(line.strip())
                     t.write('\n')
 
             elif line[0] in num_list:
-                with open(f'../output_data/english_wiki_index/tokens_info_{line[0]}.txt', 'a', encoding= 'UTF-8') as t:
+                with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{line[0]}.txt', 'a', encoding= 'UTF-8') as t:
                     t.write(line.strip())
                     t.write('\n')
 
             else:
-                with open(f'../output_data/english_wiki_index/tokens_info_others.txt', 'a', encoding= 'UTF-8') as t:
+                with open(f'../Dataset/output_data/english_wiki_index/tokens_info_others.txt', 'a', encoding= 'UTF-8') as t:
                     t.write(line.strip())
                     t.write('\n')
 
     for ch in tqdm(char_list):
         tok_count = 0
-        with open(f'../output_data/english_wiki_index/tokens_info_{ch}.txt', 'r', encoding= 'UTF-8') as f:
+        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{ch}.txt', 'r', encoding= 'UTF-8') as f:
             for line in f:
                 tok_count += 1
 
-        with open(f'../output_data/english_wiki_index/tokens_info_{ch}_count.txt', 'w', encoding= 'UTF-8') as f:
+        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{ch}_count.txt', 'w', encoding= 'UTF-8') as f:
             f.write(str(tok_count))
 
     for num in tqdm(num_list):
         tok_count = 0
-        with open(f'../output_data/english_wiki_index/tokens_info_{num}.txt', 'r', encoding= 'UTF-8') as f:
+        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{num}.txt', 'r', encoding= 'UTF-8') as f:
             for line in f:
                 tok_count += 1
 
-        with open(f'../output_data/english_wiki_index/tokens_info_{num}_count.txt', 'w', encoding= 'UTF-8') as f:
+        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{num}_count.txt', 'w', encoding= 'UTF-8') as f:
             f.write(str(tok_count))
 
     try:
         tok_count = 0
-        with open('../output_data/english_wiki_index/tokens_info_others.txt','r', encoding= 'UTF-8') as f:
+        with open('../Dataset/output_data/english_wiki_index/tokens_info_others.txt','r', encoding= 'UTF-8') as f:
             tok_count += 1
 
-        with open(f'../output_data/english_wiki_index/tokens_info_others_count.txt','w', encoding= 'UTF-8') as f:
+        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_others_count.txt','w', encoding= 'UTF-8') as f:
             f.write(str(tok_count))
     except:
         pass
 
-    os.remove('../output_data/english_wiki_index/tokens_info.txt')
+    os.remove('../Dataset/output_data/english_wiki_index/tokens_info.txt')
     print('Total tokens', num_tokens_final)
     print('Final files', num_files_final)
 

@@ -180,9 +180,7 @@ class RunQuery():
 
             for i, query in enumerate(f):
                 s = time.time()
-                tp = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/question_para/question{i + 1}.txt',
-                    'w')
+                tp = open(f'..Dataset/output_data/question_para/question{i + 1}.txt', 'w')
 
                 query = query.strip()
 
@@ -210,9 +208,7 @@ class RunQuery():
 
                 tp.close()
 
-                predicted_file = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/question_para/question{i + 1}.txt',
-                    'r')
+                predicted_file = open( f'..Dataset/output_data/question{i + 1}.txt', 'r')
 
                 corpus = (predicted_file.read().split('\n\n'))
                 while '' in corpus:
@@ -224,9 +220,7 @@ class RunQuery():
                 # doc_scores = sorted(bm25.get_scores(tokenised_query), reverse=True)
 
                 top_para = bm25.get_top_n(tokenized_query, corpus, n=num_para)
-                fc = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/top_n_para/question{i + 1}.txt',
-                    'w')
+                fc = open( f'..Dataset/output_data/question{i + 1}.txt', 'w')
                 for para in top_para:
                     fc.write(para)
                     fc.write('\n\n')
@@ -256,9 +250,7 @@ class RunQuery():
 
     def get_squad_predictions(self, num_article1, num_article2, num_article3, num_para1, num_para2, num_para3):
 
-        true_context_directory = [f for f in os.listdir(
-            "/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context")
-                                  if not f.startswith('.')]
+        true_context_directory = [f for f in os.listdir("..Dataset/squad1.0/true_context") if not f.startswith('.')]
         true_context_directory.sort(key=lambda f: int(re.sub('\D', '', f)))
 
         start = time.time()
@@ -267,9 +259,7 @@ class RunQuery():
 
             print('Extracting contexts and titles for true_context:' + str({iny + 51}))
 
-            t = open(
-                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/context{iny + 51}.txt',
-                'r')
+            t = open(f'..Dataset/squad1.0/true_context/context{iny + 51}.txt', 'r')
             data = t.read().split('\n\n')
 
             true_context, questions = data[0], data[1].split('\n')
@@ -283,15 +273,9 @@ class RunQuery():
 
                 print('Executing Query number: {0} in true_context file: {1}'.format(i + 1, iny + 51))
 
-                fp1 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'w')
-                fp2 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'w')
-                fp3 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'w')
+                fp1 = open( f'..Dataset/squad1.0/predicted_contexts/1-predicted_context/{iny + 51}_{i + 1}.txt', 'w')
+                fp2 = open(f'..Dataset/squad1.0/predicted_contexts/2-predicted_context/{iny + 51}_{i + 1}.txt', 'w')
+                fp3 = open( f'..Dataset/squad1.0/predicted_contexts/3-predicted_context/{iny + 51}_{i + 1}.txt', 'w')
 
                 query = query.strip()
 
@@ -326,9 +310,7 @@ class RunQuery():
                     fp1.write("No document found")
                     fp1.close()
 
-                predicted_file = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'r')
+                predicted_file = open( f'..Dataset/squad1.0/predicted_contexts/1-predicted_context/{iny + 51}_{i + 1}.txt', 'r')
 
                 corpus = (predicted_file.read().split('\n\n'))
                 while '' in corpus:
@@ -340,9 +322,7 @@ class RunQuery():
                 # doc_scores = sorted(bm25.get_scores(tokenised_query), reverse=True)
 
                 top_para = bm25.get_top_n(tokenized_query, corpus, n=num_para1)
-                fc1 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-top_n_pc/{iny + 51}_{i + 1}.txt',
-                    'w')
+                fc1 = open( f'..Dataset/squad1.0/predicted_contexts/1-top_n_pc/{iny + 51}_{i + 1}.txt', 'w')
                 for para in top_para:
                     fc1.write(para)
                     fc1.write('\n\n')
@@ -370,9 +350,7 @@ class RunQuery():
                     fp2.write("No document found")
                     fp2.close()
 
-                predicted_file = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'r')
+                predicted_file = open( f'..Dataset/squad1.0/predicted_contexts/2-predicted_context/{iny + 51}_{i + 1}.txt', 'r')
 
                 corpus = (predicted_file.read().split('\n\n'))
                 while '' in corpus:
@@ -384,9 +362,7 @@ class RunQuery():
                 # doc_scores = sorted(bm25.get_scores(tokenised_query), reverse=True)
 
                 top_para = bm25.get_top_n(tokenized_query, corpus, n=num_para2)
-                fc2 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-top_n_pc/{iny + 51}_{i + 1}.txt',
-                    'w')
+                fc2 = open( f'..Dataset/squad1.0/predicted_contexts/2-top_n_pc/{iny + 51}_{i + 1}.txt', 'w')
                 for para in top_para:
                     fc2.write(para)
                     fc2.write('\n\n')
@@ -414,9 +390,7 @@ class RunQuery():
                     fp3.write("No document found")
                     fp3.close()
 
-                predicted_file = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context/{iny + 51}_{i + 1}.txt',
-                    'r')
+                predicted_file = open( f'..Dataset/squad1.0/predicted_contexts/3-predicted_context/{iny + 51}_{i + 1}.txt', 'r')
 
                 corpus = (predicted_file.read().split('\n\n'))
                 while '' in corpus:
@@ -428,9 +402,7 @@ class RunQuery():
                 # doc_scores = sorted(bm25.get_scores(tokenised_query), reverse=True)
 
                 top_para = bm25.get_top_n(tokenized_query, corpus, n=num_para3)
-                fc3 = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-top_n_pc/{iny + 51}_{i + 1}.txt',
-                    'w')
+                fc3 = open( f'..Dataset/squad1.0/predicted_contexts/3-top_n_pc/{iny + 51}_{i + 1}.txt', 'w')
                 for para in top_para:
                     fc3.write(para)
                     fc3.write('\n\n')

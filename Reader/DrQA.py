@@ -312,7 +312,7 @@ class Train_Validate:
             best_f1 = f1
             best_em = em
             # Save model
-            torch.save(model.state_dict(), "/content/drive/MyDrive/ODQA/outputs/DrQA_trained.pth")
+            torch.save(model.state_dict(), "../Reader_model_output/DrQA_trained_SQuAD-1.pth")
 
             print('best model!')
             print("Best models of batch_index: {0} EM-Score:{1} & F1-score:{2}".format(len(train_loader), best_em,
@@ -348,8 +348,7 @@ class Evaluation():
         model_1 = DrQA(num_layers=3, input_size=embed_dim, hidden_size=embed_dim, dropout=0.5)
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         model_1.to(device)
-        model_DrQA.load_state_dict(torch.load('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent'
-                                              '/Reader/BERTbase/Reader_model_output/DrQA_final'))
+        model_DrQA.load_state_dict(torch.load('../Reader_model_output/DrQA_trained_SQuAD-1.pth'))
         model_1.eval()
 
         em, f1 = eval.evaluate(model_1, eval_dataset, BERT=False)
@@ -386,7 +385,7 @@ if __name__ == '__main__':
     formatter = logging.Formatter('%(asctime)s %(message)s')
 
     # setup train_Eval logger
-    log = setup_logger('logger', os.getcwd() + '/Reader/BERTbase/Reader_model_output/DrQA-TrainVal.log')
+    log = setup_logger('logger', '../DrQA-TrainVal.log')
 
     '''
       *

@@ -54,17 +54,15 @@ if __name__ == '__main__':
 
     print('Loading search engine ')
     html_tags = re.compile('&amp;|&apos;|&gt;|&lt;|&nbsp;|&quot;')
-    with open('/Retriever/wikipedia/stopwords.txt',
+    with open('../Dataset/stemwords.txt',
               'r') as f:
         stop_words = [word.strip() for word in f]
 
-    with open('/Retriever/wikipedia/stemwords.txt',
+    with open('../Dataset/stemwords.txt',
               'r') as f:
         stemmer = [word.strip() for word in f]
 
-    with open(
-            '/Retriever/output_data/english_wiki_index/num_pages.txt',
-            'r') as f:
+    with open('../Dataset/output_data/english_wiki_index/num_pages.txt','r') as f:
         num_pages = float(f.readline().strip())
 
     text_pre_processor = TextPreProcessor(html_tags, stemmer, stop_words)
@@ -73,9 +71,7 @@ if __name__ == '__main__':
     query_results = QueryResults(file_traverser)
     run_query = RunQuery(text_pre_processor, file_traverser, ranker, query_results)
 
-    temp = linecache.getline(
-        '/Retriever/output_data/english_wiki_index/id_title_map.txt',
-        0)
+    temp = linecache.getline('../Dataset/output_data/english_wiki_index/id_title_map.txt', 0)
 
     print('Loaded in', time.time() - start, 'seconds')
 

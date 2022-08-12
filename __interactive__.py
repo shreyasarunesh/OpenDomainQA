@@ -13,7 +13,7 @@
                           : https://github.com/castorini/bertserini
 '''
 
-print("Loading search engine ...")
+print("Please wait Loading search engine ...")
 
 import time
 

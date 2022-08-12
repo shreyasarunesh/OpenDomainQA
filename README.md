@@ -14,7 +14,7 @@ to scan the retrieved documents to find the answer. Lastly, the performance of b
 
 ## Quick Demo of interactive Session
 
-For interactive Session as illustrated bellow, run "__interactive__.py" file to get answers to open domain questions. 
+For interactive Session as illustrated bellow, run "__interactive__.py" file to get answers to open domain questions.
 
 The default reader model for interaction is BERT-base and MSR with Top_K_N = 10 paragraphs.
 

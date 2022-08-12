@@ -67,7 +67,7 @@ class MergeFiles():
         i = 0
         while i < self.num_itermed_files:
 
-            files_data[i] = open(f'../output_data/english_wiki_index/index_{i}.txt', 'r', encoding= 'UTF-8')
+            files_data[i] = open(f'../Dataset/output_data/english_wiki_index/index_{i}.txt', 'r', encoding= 'UTF-8')
             line[i] = files_data[i].readline().strip('\n')
             postings[i] = line[i].split('-')
             is_file_empty[i] = 0
@@ -113,7 +113,7 @@ class MergeFiles():
                             is_file_empty[i] = 1
                             files_data[i].close()
                             print(f'Removing file {str(i)}')
-                            os.remove(f'../output_data/english_wiki_index/index_{str(i)}.txt')
+                            os.remove(f'../Dataset/output_data/english_wiki_index/index_{str(i)}.txt')
                 i += 1
 
         num_files_final = self.write_data.write_final_files(data_to_merge, num_files_final)

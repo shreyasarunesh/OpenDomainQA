@@ -60,9 +60,7 @@ class FileTraverser():
         '''
         def title_search(self, page_id):
 
-                title = linecache.getline(
-                        '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index/id_title_map.txt',
-                        int(page_id) + 1).strip()
+                title = linecache.getline('../Dataset/output_data/english_wiki_index/id_title_map.txt', int(page_id) + 1).strip()
                 title = title.split('-', 1)[1]
 
                 return title
@@ -80,9 +78,7 @@ class FileTraverser():
         def search_field_file(self, field, file_num, line_num):
 
                 if line_num != '':
-                        line = linecache.getline(
-                                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index/{field}_data_{str(file_num)}.txt',
-                                int(line_num)).strip()
+                        line = linecache.getline(f'../Dataset/output_data/english_wiki_index/{field}_data_{str(file_num)}.txt', int(line_num)).strip()
                         postings = line.split('-')[1]
 
                         return postings
@@ -105,30 +101,25 @@ class FileTraverser():
                 num_list = [str(i) for i in range(0, 10)]
 
                 if token[0] in char_list:
-                        with open(
-                                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index/tokens_info_{token[0]}_count.txt',
-                                'r') as f:
+                        with open(f'../Dataset/output_data/english_wiki_index/tokens_info_{token[0]}_count.txt', 'r') as f:
                                 num_tokens = int(f.readline().strip())
 
-                        tokens_info_pointer = f'../output_data/english_wiki_index/tokens_info_{token[0]}.txt'
+                        tokens_info_pointer = f'../Dataset/output_data/english_wiki_index/tokens_info_{token[0]}.txt'
                         token_info = self.binary_search_token_info(num_tokens, tokens_info_pointer, token)
 
                 elif token[0] in num_list:
                         with open(
-                                f'../Retriever/output_data/english_wiki_index/tokens_info_{token[0]}_count.txt',
-                                'r') as f:
+                                f'../Dataset/output_data/english_wiki_index/tokens_info_{token[0]}_count.txt', 'r') as f:
                                 num_tokens = int(f.readline().strip())
 
-                        tokens_info_pointer = f'../Retriever/output_data/english_wiki_index/tokens_info_{token[0]}.txt'
+                        tokens_info_pointer = f'../Dataset/output_data/english_wiki_index/tokens_info_{token[0]}.txt'
                         token_info = self.binary_search_token_info(num_tokens, tokens_info_pointer, token)
 
                 else:
-                        with open(
-                                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index/tokens_info_others_count.txt',
-                                'r') as f:
+                        with open( f'../Dataset/output_data/english_wiki_index/tokens_info_others_count.txt', 'r') as f:
                                 num_tokens = int(f.readline().strip())
 
-                        tokens_info_pointer = f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/output_data/english_wiki_index/tokens_info_others.txt'
+                        tokens_info_pointer = f'../Dataset/output_data/english_wiki_index/tokens_info_others.txt'
                         token_info = self.binary_search_token_info(num_tokens, tokens_info_pointer, token)
 
                 return token_info

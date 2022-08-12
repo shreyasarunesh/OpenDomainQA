@@ -344,8 +344,8 @@ class Preprocessing:
 
     def main(self, BERT=True):
 
-        train_path = '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/squad2.0/train-v2.0.json'
-        eval_path = '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/squad2.0/dev-v2.0.json'
+        train_path = '../Dataset/squad2.0/train-v2.0.json'
+        eval_path = '../Dataset/squad2.0/squad2.0/dev-v2.0.json'
         prepro = Preprocessing()
 
         # get training data
