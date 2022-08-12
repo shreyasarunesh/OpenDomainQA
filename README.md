@@ -26,6 +26,13 @@ Example 1:
 Example 2:
 ![Interactive Sesion-2](Images/interactive2.png)
 
+## Datasets 
+In this project, English Wikipedia serves as a knowledge source for finding answers which is nearly 89 GB after extracting. 
+SQuAD V1.0 & V2.0 is used to train the language models. After downloading these dataset, please place in the dataset folder
+
+The latest English Wikipedia dump can be found: [English Wikipedia Dump](https://dumps.wikimedia.org/enwiki/20220501/)
+
+The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
 
 ## Installaiton 
 
@@ -109,7 +116,7 @@ The table bellow illustrates the results of both models in this project and Stat
 | **BERT-base (This project)**  | 73.27     | 66.66 | 68.42     |   64.16  |
 |-------------------------------|-------------------|----------------------|
 
-## Authors
+## Author
 
 - [@Shreyas Arunesh](https://github.com/shreyasarunesh)
 
