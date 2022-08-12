@@ -31,11 +31,12 @@ Example 2:
 
 ## Datasets 
 In this project, English Wikipedia serves as a knowledge source for finding answers which is nearly 89 GB after extracting. 
-SQuAD V1.0 & V2.0 is used to train the language models. After downloading these dataset, please place in the dataset folder
+SQuAD V1.0 & V2.0 is used to train the language models. After downloading these dataset. please place in the "dataset" folder after downloading.
 
 The latest English Wikipedia dump can be found: [English Wikipedia Dump](https://dumps.wikimedia.org/enwiki/20220501/)
 
 The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
+
 
 ## Installaiton 
 
