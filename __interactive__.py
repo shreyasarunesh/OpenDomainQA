@@ -1,8 +1,17 @@
 
-
-
-
-import OpenSSL.crypto
+'''
+ *
+ * Name                   :   F21MP- Open Domain Question Answering (ODQA) Agent.
+ *
+ * Description            :  This file illustrates the interactive session to get answer to Open domain questions from
+                                this project system. Just execute this file to start interacting with the file.
+ *
+ * Author                 :   Shreyas Arunesh
+ *
+ *
+ * Reference              : https://github.com/facebookresearch/DrQA
+                          : https://github.com/castorini/bertserini
+'''
 
 print("Loading search engine ...")
 
@@ -18,6 +27,7 @@ from Retriever.WikiSearching.BM25 import *
 
 from Reader.BERT import *
 from Reader.BERT import Bert_QA
+from Reader.DrQA import DrQA
 import torch
 from transformers import AutoTokenizer, BertTokenizerFast
 from tabulate import tabulate
@@ -92,7 +102,7 @@ if __name__ == '__main__':
             # Load the fine-tuned model
             device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
             model_bert = Bert_QA.from_pretrained( '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent'
-                                                  '/Reader/Reader_model_output/BERT_finetuned_model')
+                                                  '/Reader/model_output/BERT_finetuned_model')
             model_bert.to(device)
             model_bert.eval()
 
@@ -122,28 +132,27 @@ if __name__ == '__main__':
 
                     predicted_ans_list.append(tokenizer.decode(input_ids[0][answer_start:(answer_end + 1)]))
 
-                #     total_ans_score = start_score * end_score
-                #     if top_total_score.sum() != 0:
-                #         total_score = (weight * total_ans_score + (1 - weight) * ctx_score)
-                #         if total_score[0] > top_total_score:
-                #             top_total_score = total_score[0]
-                #             top_start_score = start_score
-                #             top_end_score = end_score
-                #
-                #         else:
-                #             pass
-                #     else:
-                #         total_score = (weight * total_ans_score + (1 - weight) * ctx_score)
-                #         top_total_score = total_score[0]
-                #         top_start_score = start_score
-                #
-                # top_answer = (tokenizer.decode(input_ids[0][answer_start:(answer_end + 1)]))
+                    total_ans_score = start_score * end_score
+                    if top_total_score.sum() != 0:
+                        total_score = (weight * total_ans_score + (1 - weight) * ctx_score)
+                        if total_score[0] > top_total_score:
+                            top_total_score = total_score[0]
+                            top_start_score = start_score
+                            top_end_score = end_score
+
+                        else:
+                            pass
+                    else:
+                        total_score = (weight * total_ans_score + (1 - weight) * ctx_score)
+                        top_total_score = total_score[0]
+                        top_start_score = start_score
+
+                top_answer = (tokenizer.decode(input_ids[0][answer_start:(answer_end + 1)]))
 
                 answer = []
                 for i in predicted_ans_list:
                     if i != '[CLS]' and i!= "":
                         answer.append(i)
-
 
                 # print("Question: {0} \nTop Predicted Answer: {1}".format(question, top_answer))
                 print("Question: {0} \nTop Predicted Answer: {1}".format(question, answer[0]))
@@ -162,7 +171,7 @@ if __name__ == '__main__':
 
 
 
-#
+
 # """Reader Experiments"""
 #
 # from Reader.BERT import *
@@ -178,7 +187,7 @@ if __name__ == '__main__':
 #     # Load the fine-tuned model
 #     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 #     model_bert = Bert_QA.from_pretrained(
-#         '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/Reader_model_output/BERT_finetuned_model')
+#         '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/model_output/BERT_finetuned_model')
 #     model_bert.to(device)
 #     model_bert.eval()
 #
@@ -267,7 +276,33 @@ if __name__ == '__main__':
 #           Symptoms of COVID-19 are highly variable, ranging from none to severe illness. The virus spreads mainly through the air when people are
 #           near each other."""]
 #
-# question = "who is the author of Harry Potter"
-# top_sample_scores = [3, 10, 2]
+# questions = [
+#            "How many metres is Olympus?",
+#            "Where Olympus is near?",
+#            "How far away is Olympus from Thessaloniki?"
+#           ]
+#
+# questions=  [
+#            "Who wrote Harry Potter's novels?",
+#            "Who are Harry Potter's friends?",
+#            "Who is the enemy of Harry Potter?",
+#            "What are Muggles?",
+#            "Which is the name of Harry Poter's first novel?",
+#            "When did the first novel release?",
+#            "Who was attracted by Harry Potter novels?",
+#            "How many languages Harry Potter has been translated into? "
+#           ]
+#
+# questions  = [
+#            "What is COVID-19?",
+#            "What is caused by COVID-19?",
+#            "How many cases have been confirmed from COVID-19?",
+#            "How many deaths have been confirmed from COVID-19?",
+#            "How is COVID-19 spread?",
+#            "How long can an infected person remain infected?",
+#            "Can a infected person spread the virus even if they don't have symptoms?",
+#            "What do elephants eat?"
+#           ]
 #
 # get_answers(question, top_sample_contexts, top_sample_scores, weight=1.0)
+
