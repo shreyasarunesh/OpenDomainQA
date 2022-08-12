@@ -1,4 +1,14 @@
 
+'''
+ *
+ * Name                   :   F21MP- Open Domain Question Answering (ODQA) Agent.
+ *
+ * Description            :  This file Evaluates the SSR and MSR
+ *
+ * Author                 :   Shreyas Arunesh
+ *
+ *
+'''
 import wikipedia
 from Retriever.WikiSearching.RunQuery import *
 from Retriever.WikiSearching.FileTraverser import *
@@ -8,364 +18,6 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 model = SentenceTransformer('bert-base-nli-mean-tokens')
 from sklearn.metrics.pairwise import cosine_similarity
-
-
-def get_ques_score1():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-
-def get_ques_score2():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-def get_ques_score3():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-def get_squad_avg_precision_at_k1(threshold):
-    score = get_ques_score1()
-    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-    return round(precision, 2)
-
-def get_squad_avg_precision_at_k2(threshold):
-    score = get_ques_score2()
-    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-    return round(precision, 2)
-
-def get_squad_avg_precision_at_k3(threshold):
-    score = get_ques_score3()
-    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-    return round(precision, 2)
-
-def get_ques_score_MSR1():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-top_n_pc') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/1-top_n_pc/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-def get_ques_score_MSR2():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-top_n_pc') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/2-top_n_pc/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-def get_ques_score_MSR3():
-  predicted_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-top_n_pc') if not f.startswith('.')]
-
-  true_titles_dir_list = [f for f in os.listdir('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
-  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
-  ques_bert_score= []
-  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-      pred_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/predicted_contexts/3-top_n_pc/'+ pfile, 'r')
-      true_file = open('/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
-      # print(pred_file, true_file)
-      true_pred_cor = []
-      true_pred_cor.append(true_file.read().lower())
-      pred_contexts = pred_file.read().split('\n\n')
-      while '' in pred_contexts:
-          pred_contexts.remove('')
-      for cont in pred_contexts:
-          true_pred_cor.append(cont.lower())
-      para_embeddings = model.encode(true_pred_cor)
-      if para_embeddings.shape[0] >1:
-        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
-        ques_bert_score.append(np.max(score))
-      else:
-        pass
-  return ques_bert_score
-
-def get_squad_avg_precision_at_k_MSR1(threshold):
-    score = get_ques_score_MSR1()
-    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-
-    return round(precision, 2)
-
-def get_squad_avg_precision_at_k_MSR2(threshold):
-    score = get_ques_score_MSR2()
-    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-
-    return round(precision, 2)
-
-def get_squad_avg_precision_at_k_MSR3(threshold):
-    score = get_ques_score_MSR3()
-    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
-    n_relavant = 0
-    for rec in score:
-
-        if rec >= threshold:
-            n_relavant += 1
-
-    precision = (n_relavant / (len(score)))*100
-
-
-    return round(precision, 2)
-
-import time
-start = time.time()
-threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
-precision_score1 = []
-precision_score_bm251 = []
-for thre in threshold:
-    score1 = get_squad_avg_precision_at_k1(float(thre))
-    precision_score1.append(score1)
-    score2 = get_squad_avg_precision_at_k_MSR1(float(thre))
-    precision_score_bm251.append(score2)
-    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
-    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
-    print('\n')
-
-
-end = time.time()
-temp = end-start
-print(temp)
-hours = temp//3600
-temp = temp - 3600*hours
-minutes = temp//60
-seconds = temp - 60*minutes
-print('%d:%d:%d' %(hours,minutes,seconds))
-
-import time
-start = time.time()
-threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
-precision_score2 = []
-precision_score_bm252 = []
-for thre in threshold:
-    score1 = get_squad_avg_precision_at_k2(float(thre))
-    precision_score2.append(score1)
-    score2 = get_squad_avg_precision_at_k_MSR2(float(thre))
-    precision_score_bm252.append(score2)
-    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
-    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
-    print('\n')
-
-end = time.time()
-temp = end-start
-print(temp)
-hours = temp//3600
-temp = temp - 3600*hours
-minutes = temp//60
-seconds = temp - 60*minutes
-print('%d:%d:%d' %(hours,minutes,seconds))
-
-import time
-start = time.time()
-threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
-precision_score3 = []
-precision_score_bm253 = []
-for thre in threshold:
-    score1 = get_squad_avg_precision_at_k3(float(thre))
-    precision_score3.append(score1)
-    score2 = get_squad_avg_precision_at_k_MSR3(float(thre))
-    precision_score_bm253.append(score2)
-    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
-    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
-    print('\n')
-
-end = time.time()
-temp = end-start
-print(temp)
-hours = temp//3600
-temp = temp - 3600*hours
-minutes = temp//60
-seconds = temp - 60*minutes
-print('%d:%d:%d' %(hours,minutes,seconds))
-
-
-import matplotlib.pyplot as plt1
-import matplotlib.pyplot as plt2
-import matplotlib.pyplot as plt3
-
-plt1.plot(threshold, precision_score1, color='r', label='SSR')
-plt1.plot(threshold, precision_score_bm251, color='g', label='MSR')
-plt1.title("K_Article=15 N_Para=20")
-plt1.xlabel('Threshold')
-plt1.ylabel('Precision@k_N.')
-plt1.legend()
-plt1.show()
-
-plt2.plot(threshold, precision_score2, color='r', label='SSR')
-plt2.plot(threshold, precision_score_bm252, color='g', label='MSR')
-plt2.title("K_Article=25 N_Para=15")
-plt2.xlabel('Threshold')
-plt2.ylabel('Precision@k_N.')
-plt2.legend()
-plt2.show()
-
-plt3.plot(threshold, precision_score3, color='r', label='SSR')
-plt3.plot(threshold, precision_score_bm253, color='g', label='MSR')
-plt3.title("K_Article=35 N_Para=10")
-plt3.xlabel('Threshold')
-plt3.ylabel('Precision@k_N.')
-plt3.legend()
-plt3.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class Evaluation():
@@ -611,10 +263,413 @@ class Evaluation():
 
         return round(precision, 2)
 
+'''
+ *
+ *  Summary : This function gets the bert score list of all the contexts predicted_paragraphs vs true_context (SQuAD para) in SSR
+ 
+                Three functions that are similar are:
+                    1. get_ques_score1 for K= 15 N-=20
+                    2. get_ques_score1 for K= 25 N-=15
+                    3. get_ques_score1 for K= 35 N-=10
+ *
+ *  Args    : Param - files names of predicted and true paragraphs
+ *
+ *  Returns : list of bert score of all questions. 
+ *
+'''
+
+def get_ques_score1():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+
+def get_ques_score2():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/2-predicted_context/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+def get_ques_score3():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/3-predicted_context/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+'''
+ *
+ *  Summary : This function gets the average precision for all the questions in the SQuAD dataset for a given threshold in SSR.
+                Three functions that are similar are:
+                    1. get_ques_score1 for K= 15 N-=20
+                    2. get_ques_score1 for K= 25 N-=15
+                    3. get_ques_score1 for K= 35 N-=10
+ *
+ *  Args    : Param - threshold
+ *
+ *  Returns : Precision of the dataset.  
+ *
+'''
+def get_squad_avg_precision_at_k1(threshold):
+    score = get_ques_score1()
+    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+    return round(precision, 2)
+
+def get_squad_avg_precision_at_k2(threshold):
+    score = get_ques_score2()
+    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+    return round(precision, 2)
+
+def get_squad_avg_precision_at_k3(threshold):
+    score = get_ques_score3()
+    print('Squad-1 SSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+    return round(precision, 2)
+
+
+'''
+ *
+ *  Summary : This function gets the bert score list of all the contexts predicted_paragraphs vs true_context (SQuAD para) in MSR
+
+                Three functions that are similar are:
+                    1. get_ques_score1 for K= 15 N-=20
+                    2. get_ques_score1 for K= 25 N-=15
+                    3. get_ques_score1 for K= 35 N-=10
+ *
+ *  Args    : Param - files names of predicted and true paragraphs
+ *
+ *  Returns : list of bert score of all questions. 
+ *
+'''
+
+def get_ques_score_MSR1():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/1-top_n_pc') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/1-top_n_pc/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+def get_ques_score_MSR2():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/2-top_n_pc') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/2-top_n_pc/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+def get_ques_score_MSR3():
+  predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/3-top_n_pc') if not f.startswith('.')]
+
+  true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context') if not f.startswith('.')]
+  predicted_titles_dir_list.sort(), true_titles_dir_list.sort()
+  ques_bert_score= []
+  for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
+      pred_file = open('../Retriever/Evaluation/squad1_output/predicted_contexts/3-top_n_pc/'+ pfile, 'r')
+      true_file = open('../Retriever/Evaluation/squad1_output/true_context/'+ tfile, 'r')
+      # print(pred_file, true_file)
+      true_pred_cor = []
+      true_pred_cor.append(true_file.read().lower())
+      pred_contexts = pred_file.read().split('\n\n')
+      while '' in pred_contexts:
+          pred_contexts.remove('')
+      for cont in pred_contexts:
+          true_pred_cor.append(cont.lower())
+      para_embeddings = model.encode(true_pred_cor)
+      if para_embeddings.shape[0] >1:
+        score = cosine_similarity([para_embeddings[0]], para_embeddings[1:])
+        ques_bert_score.append(np.max(score))
+      else:
+        pass
+  return ques_bert_score
+
+
+'''
+ *
+ *  Summary : This function gets the average precision for all the questions in the SQuAD dataset for a given threshold in MSR.
+                Three functions that are similar are:
+                    1. get_ques_score1 for K= 15 N-=20
+                    2. get_ques_score1 for K= 25 N-=15
+                    3. get_ques_score1 for K= 35 N-=10
+ *
+ *  Args    : Param - threshold
+ *
+ *  Returns : Precision of the dataset.  
+ *
+'''
+def get_squad_avg_precision_at_k_MSR1(threshold):
+    score = get_ques_score_MSR1()
+    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+
+    return round(precision, 2)
+
+def get_squad_avg_precision_at_k_MSR2(threshold):
+    score = get_ques_score_MSR2()
+    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+
+    return round(precision, 2)
+
+def get_squad_avg_precision_at_k_MSR3(threshold):
+    score = get_ques_score_MSR3()
+    print('Squad-1 MSR BERT- Similarity score for Each Question(Max score)-{0}'.format(score))
+    n_relavant = 0
+    for rec in score:
+
+        if rec >= threshold:
+            n_relavant += 1
+
+    precision = (n_relavant / (len(score)))*100
+
+
+    return round(precision, 2)
+
+
+'''
+ *
+ *  Summary : This is the main function that perfroms the evaluation of SSR and MSR
+ *
+ *
+'''
+import time
+start = time.time()
+threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
+precision_score1 = []
+precision_score_bm251 = []
+for thre in threshold:
+    score1 = get_squad_avg_precision_at_k1(float(thre))
+    precision_score1.append(score1)
+    score2 = get_squad_avg_precision_at_k_MSR1(float(thre))
+    precision_score_bm251.append(score2)
+    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
+    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
+    print('\n')
+
+
+end = time.time()
+temp = end-start
+print(temp)
+hours = temp//3600
+temp = temp - 3600*hours
+minutes = temp//60
+seconds = temp - 60*minutes
+print('%d:%d:%d' %(hours,minutes,seconds))
+
+import time
+start = time.time()
+threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
+precision_score2 = []
+precision_score_bm252 = []
+for thre in threshold:
+    score1 = get_squad_avg_precision_at_k2(float(thre))
+    precision_score2.append(score1)
+    score2 = get_squad_avg_precision_at_k_MSR2(float(thre))
+    precision_score_bm252.append(score2)
+    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
+    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
+    print('\n')
+
+end = time.time()
+temp = end-start
+print(temp)
+hours = temp//3600
+temp = temp - 3600*hours
+minutes = temp//60
+seconds = temp - 60*minutes
+print('%d:%d:%d' %(hours,minutes,seconds))
+
+import time
+start = time.time()
+threshold = [0.25, 0.40, 0.50, 0.75, 0.90, 0.95, 1.0]
+precision_score3 = []
+precision_score_bm253 = []
+for thre in threshold:
+    score1 = get_squad_avg_precision_at_k3(float(thre))
+    precision_score3.append(score1)
+    score2 = get_squad_avg_precision_at_k_MSR3(float(thre))
+    precision_score_bm253.append(score2)
+    print('Precision of SINGLE STAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score1))
+    print('Precision OF MULTISTAGE RETRIEVER for threshold {0} is: {1}'.format(thre, score2))
+    print('\n')
+
+end = time.time()
+temp = end-start
+print(temp)
+hours = temp//3600
+temp = temp - 3600*hours
+minutes = temp//60
+seconds = temp - 60*minutes
+print('%d:%d:%d' %(hours,minutes,seconds))
+
+
+
+'''
+ *
+ *  Summary : This block of code plots the results obtained
+ *
+ *
+'''
+import matplotlib.pyplot as plt1
+import matplotlib.pyplot as plt2
+import matplotlib.pyplot as plt3
+
+plt1.plot(threshold, precision_score1, color='r', label='SSR')
+plt1.plot(threshold, precision_score_bm251, color='g', label='MSR')
+plt1.title("K_Article=15 N_Para=20")
+plt1.xlabel('Threshold')
+plt1.ylabel('Precision@k_N.')
+plt1.legend()
+plt1.show()
+
+plt2.plot(threshold, precision_score2, color='r', label='SSR')
+plt2.plot(threshold, precision_score_bm252, color='g', label='MSR')
+plt2.title("K_Article=25 N_Para=15")
+plt2.xlabel('Threshold')
+plt2.ylabel('Precision@k_N.')
+plt2.legend()
+plt2.show()
+
+plt3.plot(threshold, precision_score3, color='r', label='SSR')
+plt3.plot(threshold, precision_score_bm253, color='g', label='MSR')
+plt3.title("K_Article=35 N_Para=10")
+plt3.xlabel('Threshold')
+plt3.ylabel('Precision@k_N.')
+plt3.legend()
+plt3.show()
+
 
 if __name__ == '__main__':
-    evaluation = Evaluation()
-    evaluation.extract_true_squad_corpus()
+    # evaluation = Evaluation()
+    # evaluation.extract_true_squad_corpus()
 
 
     # tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/bert-base-nli-mean-tokens')
