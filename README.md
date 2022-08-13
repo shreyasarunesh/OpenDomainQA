@@ -99,7 +99,9 @@ Open_Domain_Question_Answering_Agent-ODQA-
 
 ## Results
 
-The table bellow illustrates the results of both models (DrQA and BERT-base) in this project compared to other 
+The table bellow illustrates the results of both language models (DrQA and BERT-base) in this project compared to other SOTA models.
+
+The train_validation log files of both DrQA and BERT-base models can be found in the Reader_model_output. 
 State-of-the-art models.
 ```
 |--------------------------------------------------------------------------|
