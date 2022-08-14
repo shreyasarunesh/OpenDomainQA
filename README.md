@@ -150,7 +150,7 @@ The results with K = 35 and N = 10 for Single Stage Retriever and Multi Stage Re
 In this project the reading comprehension task is accomplished by two language models, the first model is a traditional neural 
 network based model inspired from DrQA proposed by Facebook [Reading Wikipedia to Answer Open-Domain Questions](https://arxiv.org/abs/1704.00051) 
 and the second model is inspired from the recent success of the self attention Transformer based model BERT-base proposed by google 
- [BERT](https://arxiv.org/abs/1810.04805) &[End-to-End Open-Domain Question Answering with BERTserini](https://arxiv.org/pdf/1902.01718) . Both models are extractive question answering system which involves extracting the answer to a specific question from a document.
+ [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805) & [End-to-End Open-Domain Question Answering with BERTserini](https://arxiv.org/pdf/1902.01718) . Both models are extractive question answering system which involves extracting the answer to a specific question from a document.
 
 To start training and validating DrQA language model on SQuAD V2.0 dataset, execute the DrQA.py file under Reader folder 
 as illustrated bellow. 
