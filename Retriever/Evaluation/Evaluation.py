@@ -206,7 +206,7 @@ class Evaluation():
 
     def get_overall_precision_for_given_questions(self, threshold):
 
-        score = evaluation.get_score_at_k()
+        score = self.get_score_at_k()
 
         n_relavant = 0
         for rec in score:

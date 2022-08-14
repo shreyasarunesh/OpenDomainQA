@@ -10,3 +10,4 @@ torch==1.5.1+cu101
 nltk>=3.5
 logging
 PyStemmer
+Wikipedia-API

@@ -123,6 +123,17 @@ State-of-the-art models.
 | **BERT-base (This project)**  | 73.27     | 66.66 | 68.42     |   64.16  |
 |--------------------------------------------------------------------------|
 ```
+## Project components
+
+This project consists of two components Document Retriever and Document Reader.
+
+### Document Retriever 
+
+To interactively query Wikipedia:
+
+### Document Reader
+
+
 
 ## Author
 

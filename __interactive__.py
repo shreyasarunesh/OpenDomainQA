@@ -60,14 +60,8 @@ if __name__ == '__main__':
     num_para = 20  # Number of para extracted in each page.
 
     html_tags = re.compile('&amp;|&apos;|&gt;|&lt;|&nbsp;|&quot;')
-    with open('../Dataset/stopwords.txt', 'r') as f:
-        stop_words = [word.strip() for word in f]
-
-    with open('../Dataset/stemwords.txt', 'r') as f:
-        stemmer = [word.strip() for word in f]
-
-    with open('../Dataset/output_data/english_wiki_index/num_pages.txt','r') as f:
-        num_pages = float(f.readline().strip())
+    stop_words = (set(stopwords.words("english")))
+    stemmer = Stemmer('english')
 
     text_pre_processor = TextPreProcessor(html_tags, stemmer, stop_words)
     file_traverser = FileTraverser()
