@@ -29,14 +29,13 @@ Example 1:
 Example 2:
 ![Interactive Sesion-2](Images/interactive2.png)
 
-## Datasets 
+## Datasets
 In this project, English Wikipedia serves as a knowledge source for finding answers which is nearly 89 GB after extracting. 
 SQuAD V1.0 & V2.0 is used to train the language models. After downloading these dataset. please place in the "dataset" folder after downloading.
 
 The latest English Wikipedia dump can be found: [English Wikipedia Dump](https://dumps.wikimedia.org/enwiki/20220501/)
 
 The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
-
 
 ## Installaiton 
 
@@ -133,7 +132,18 @@ To interactively query Wikipedia:
 
 ### Document Reader
 
+This project employs the classic non machine learning based information retrieval system equipped with two levels of filtering to build an effective information retrieval system that narrows the search space. 
+Firstly, Single stage Retriever extracts and ranks the top K Wikipedia Article titles where the span of answer for a given question might appear in the content of those Articles. 
+Secondly, Multi Stage Retriever extracts and ranks the top\_N individual paragraphs from the extracted Wikipedia titles where the span of answer might contain in those Top\_N retrieved paragraphs.
 
+To interact with the Information retrieval system, execute the __main__.py file in wikiSearching folder as illustrated bellow. 
+The default parameter is K = 25 and N = 10. 
+
+```bash
+python Retriever/WikiSearching/__main__.py
+```
+The results for retriever with SSR and MSR are as bellow. 
+![Retriever results](Images/retres.png)
 
 ## Author
 
