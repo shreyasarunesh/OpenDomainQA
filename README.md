@@ -142,7 +142,7 @@ The default parameter is K = 25 and N = 10.
 ```bash
 python Retriever/WikiSearching/__main__.py
 ```
-The results for retriever with SSR and MSR are as bellow. 
+The results with K = 35 and N = 10 for Single Stage Retriever and Multi Stage Retriever is illustrated in the figure bellow.  
 ![Retriever results](Images/retres.png)
 
 ## Author
