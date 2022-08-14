@@ -140,7 +140,7 @@ To interact with the Information retrieval system, execute the __main__.py file 
 The default parameter is K = 25 and N = 10. 
 
 ```bash
-python Retriever/WikiSearching/__main__.py
+python ../Retriever/WikiSearching/__main__.py
 ```
 The results with K = 35 and N = 10 for Single Stage Retriever and Multi Stage Retriever is illustrated in the figure bellow.  
 ![Retriever results](Images/retres.png)
@@ -151,6 +151,27 @@ In this project the reading comprehension task is accomplished by two language m
 network based model inspired from DrQA proposed by Facebook [Reading Wikipedia to Answer Open-Domain Questions](https://arxiv.org/abs/1704.00051) 
 and the second model is inspired from the recent success of the self attention Transformer based model BERT-base proposed by google 
  [BERT](https://arxiv.org/abs/1810.04805) &[End-to-End Open-Domain Question Answering with BERTserini](https://arxiv.org/pdf/1902.01718) . Both models are extractive question answering system which involves extracting the answer to a specific question from a document.
+
+To start training and validating DrQA language model on SQuAD V2.0 dataset, execute the DrQA.py file under Reader folder 
+as illustrated bellow. 
+
+```bash
+python ../Reader/DrQA.py
+```
+The results of DrQA model on SQuAD V2.0 dataset is illustrated in the figure bellow. 
+
+![DrQA results](Images/drqare.png)
+
+To start fine-tuning and validating BERT-base language model on SQuAD V2.0 dataset, execute the BERT.py file under Reader folder 
+as illustrated bellow. 
+
+```bash
+python ../Reader/BERT.py
+```
+The results of BERT-base model on SQuAD V2.0 dataset is illustrated in the figure bellow.
+
+![](Images/bertres.png)
+
 ## Author
 
 - [@Shreyas Arunesh](https://github.com/shreyasarunesh)
