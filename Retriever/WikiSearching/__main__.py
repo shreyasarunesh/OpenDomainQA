@@ -44,7 +44,7 @@ from collections import Counter
 if __name__ == '__main__':
     start = time.time()
 
-    file_name = '/Retriever/Evaluation/questions'
+    file_name = '../Retriever/Evaluation/questions'
     num_article = 10  # Value of K- number of articles.
     num_article2 = 25
     num_article3 = 35

@@ -114,22 +114,18 @@ class Evaluation():
 
     def extract_true_squad_corpus(self):
         true_context_directory = [f for f in os.listdir(
-            "/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/cont_ques")
-                                  if not f.startswith('.')]
+            "../Retriever/Evaluation/squad1_output/cont_ques") if not f.startswith('.')]
         true_context_directory.sort(key=lambda f: int(re.sub('\D', '', f)))
 
         for iny, file in enumerate(true_context_directory):
             t = open(
-                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/cont_ques/context{iny + 1}.txt',
-                'r')
+                f'../Retriever/Evaluation/squad1_output/cont_ques/context{iny + 1}.txt', 'r')
             data = t.read().split('\n\n')
             true_context, questions = data[0], data[1].split('\n')
             while '' in questions:
                 questions.remove('')
             for i, query in enumerate(questions):
-                fp = open(
-                    f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/squad1_output/true_context/{iny + 1}_{i + 1}.txt',
-                    'w')
+                fp = open( f'../Retriever/Evaluation/squad1_output/true_context/{iny + 1}_{i + 1}.txt', 'w')
                 fp.write(true_context)
 
     """
@@ -139,13 +135,11 @@ class Evaluation():
 
     def get_true_title_for_given_questions(self, value_of_k):
         fp = open(
-            '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/questions',
-            'r')
+            '../Retriever/Evaluation/questions', 'r')
         questions = fp.read().split('\n')
         for i, query in enumerate(questions):
             true_content = open(
-                f'/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Retriever/Evaluation/trueoutput/question{i + 1}.txt',
-                'w')
+                f'../Retriever/Evaluation/question{i + 1}.txt', 'w')
             for items in (wikipedia.search(query, results=value_of_k)):
                 true_content.write(wiki_wiki.page(items).title)
                 true_content.write('\n')
@@ -225,15 +219,15 @@ class Evaluation():
     """
 
     def get_squad_ques_bert_score(self):
-        predicted_titles_dir_list = [f for f in os.listdir('/content/drive/MyDrive/Colab Notebooks/predicted_context')
+        predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_context')
                                      if not f.startswith('.')]
 
-        true_titles_dir_list = [f for f in os.listdir('/content/drive/MyDrive/Colab Notebooks/true_context_test') if
+        true_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/true_context_test') if
                                 not f.startswith('.')]
         ques_bert_score = []
         for (pfile, tfile) in zip(predicted_titles_dir_list, true_titles_dir_list):
-            pred_file = open('/content/drive/MyDrive/Colab Notebooks/predicted_context/' + pfile, 'r')
-            true_file = open('/content/drive/MyDrive/Colab Notebooks/true_context_test/' + tfile, 'r')
+            pred_file = open('../Retriever/Evaluation/squad1_output/predicted_context/' + pfile, 'r')
+            true_file = open('../Retriever/Evaluation/squad1_output/true_context_test/' + tfile, 'r')
             true_pred_cor = []
             true_pred_cor.append(true_file.read().lower())
             pred_contexts = pred_file.read().split('\n\n')
@@ -262,7 +256,29 @@ class Evaluation():
         print('precision of squad dataset for k=20:{0}'.format(precision))
 
         return round(precision, 2)
+if __name__ == '__main__':
+    # evaluation = Evaluation()
+    # evaluation.extract_true_squad_corpus()
 
+
+    # tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/bert-base-nli-mean-tokens')
+    # model = AutoModel.from_pretrained('sentence-transformers/bert-base-nli-mean-tokens')
+    # value_of_k = 10  # Make sure the value of K is same for predicted_titles in WikiSearch main file.
+    #
+    # threshold = [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90]
+    # evaluation = Evaluation()
+    #
+    # # evaluation.get_overall_precision_for_given_questions(threshold=0.7)
+    #
+    # precision_score = []
+    # for thre in threshold:
+    #     score = evaluation.get_squad_avg_precision_at_k20(float(thre))
+    #     precision_score.append(score)
+    #     print('Precision of retriever model for SQUAD dataset with threshold {0} is: {1}'.format(thre, score))
+    # plt.plot(threshold, precision_score)
+    # plt.xlabel('Threshold')
+    # plt.ylabel('Precision for SQUAD dataset')
+    # plt.show()
 '''
  *
  *  Summary : This function gets the bert score list of all the contexts predicted_paragraphs vs true_context (SQuAD para) in SSR
@@ -277,6 +293,7 @@ class Evaluation():
  *  Returns : list of bert score of all questions. 
  *
 '''
+
 
 def get_ques_score1():
   predicted_titles_dir_list = [f for f in os.listdir('../Retriever/Evaluation/squad1_output/predicted_contexts/1-predicted_context') if not f.startswith('.')]
@@ -667,48 +684,8 @@ plt3.legend()
 plt3.show()
 
 
-if __name__ == '__main__':
-    # evaluation = Evaluation()
-    # evaluation.extract_true_squad_corpus()
 
 
-    # tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/bert-base-nli-mean-tokens')
-    # model = AutoModel.from_pretrained('sentence-transformers/bert-base-nli-mean-tokens')
-    # value_of_k = 10  # Make sure the value of K is same for predicted_titles in WikiSearch main file.
-    #
-    # threshold = [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90]
-    # evaluation = Evaluation()
-    #
-    # # evaluation.get_overall_precision_for_given_questions(threshold=0.7)
-    #
-    # precision_score = []
-    # for thre in threshold:
-    #     score = evaluation.get_squad_avg_precision_at_k20(float(thre))
-    #     precision_score.append(score)
-    #     print('Precision of retriever model for SQUAD dataset with threshold {0} is: {1}'.format(thre, score))
-    # plt.plot(threshold, precision_score)
-    # plt.xlabel('Threshold')
-    # plt.ylabel('Precision for SQUAD dataset')
-    # plt.show()
-
-
-# import bs4
-# import requests
-# import unicodedata
-# import re
-#
-# def get_paragraphs(page_name):
-#
-#     r = requests.get('https://en.wikipedia.org/api/rest_v1/page/html/{0}'.format(page_name))
-#     soup = bs4.BeautifulSoup(r.content, 'html.parser')
-#     html_paragraphs = soup.find_all('p')
-#
-#     for p in html_paragraphs:
-#         cleaned_text = re.sub('(\[[0-9]+\])', '', unicodedata.normalize('NFKD', p.text)).strip()
-#         if cleaned_text:
-#             yield cleaned_text
-#
-# # print(list(get_paragraphs('capital punishment in the united kingdom'))[3])
 
 
 
