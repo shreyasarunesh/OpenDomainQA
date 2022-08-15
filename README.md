@@ -148,8 +148,12 @@ The default parameter is K = 25 and N = 10.
 Users are allowed to search information either using a simple query or using Simple and field specific query or simple and 
 field specific query for example:
 
-Type 1 (Simple Query):- What is the capital of Scotland ?
+Type 1 (Simple Query):- What is the capital of Scotland ? 
+
+
 Type 2 (Field Query):- b:Who is the prime minister of India? i:2022
+
+
 Type 3 (Simple+ Field):- Who is Boris Johnson? t:United Kingdom i:2022
 
 ```bash
