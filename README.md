@@ -53,7 +53,7 @@ git clone git@github.com:shreyasarunesh/Open_Domain_Question_Answering_Agent-ODQ
 cd Open_Domain_Question_Answering_Agent-ODQA-; pip install -r requirements.txt; 
 ```
 
-The repository looks like the bellow format. 
+The folders and files in the repository looks like the bellow format. 
 ```
 Open_Domain_Question_Answering_Agent-ODQA-
 ├── Retriever
