@@ -29,13 +29,18 @@ Example 1:
 Example 2:
 ![Interactive Sesion-2](Images/interactive2.png)
 
-## Datasets
+## Models and Datasets
 In this project, English Wikipedia serves as a knowledge source for finding answers which is nearly 89 GB after extracting. 
 SQuAD V1.0 & V2.0 is used to train the language models. After downloading these dataset. please place in the "dataset" folder after downloading.
 
 The latest English Wikipedia dump can be found: [English Wikipedia Dump](https://dumps.wikimedia.org/enwiki/20220501/)
 
 The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
+
+The structure of DrQA model is as illustrated in the figure bellow and the BERT-base model can be found the Huggingface library: 
+[BERT-base-uncased](https://huggingface.co/bert-base-uncased)
+
+![DrQA model](Images/dr.png)
 
 ## Installaiton 
 
