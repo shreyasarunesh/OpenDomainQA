@@ -37,8 +37,8 @@ The latest English Wikipedia dump can be found: [English Wikipedia Dump](https:/
 
 The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
 
-The Wikipedia Index and the trained models can be downloaded through this link: [Models and Indexing files](https://drive.google.com/drive/folders/1ZO7ZJ8N02HEm6bR_kj6LiBiR1_7loPMG?usp=sharing)
-Warning: The wikipedia Indexing file is ~ 22 GB
+The Wikipedia Index and the trained models can be downloaded through Google drive, in this link: [Models and Indexing files](https://drive.google.com/drive/folders/1ZO7ZJ8N02HEm6bR_kj6LiBiR1_7loPMG?usp=sharing)
+Warning: The wikipedia Indexing file is ~ 22 GB.
 
 
 The structure of DrQA model is as illustrated in the figure bellow and the BERT-base model can be found the Huggingface library: 
@@ -48,8 +48,8 @@ The structure of DrQA model is as illustrated in the figure bellow and the BERT-
 
 ## Installaiton 
 
-Installation is simple. This project requires Linux/OSX and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
-The repo is tested on Python 3.10, Cuda 10.1, PyTorch 1.5.1 on Tesla P100 GPUs. Besides that, conda is recommended for convinence.
+Installation is simple. This project requires Linux/OSX/Windows Operating system and Python 3.5 or higher. It also requires installing PyTorch version >= 1.0.0. 
+The repo is tested on Python 3.10, Cuda 10.1, PyTorch 1.5.1 on Tesla P100 GPUs. Besides, that, conda is recommended for convinence.
 
 Download  SQuAD datafiles, GloVe word vectors, Transformers and other dependencies listed in requirements.txt. 
 
