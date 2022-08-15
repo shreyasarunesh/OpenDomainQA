@@ -131,11 +131,7 @@ State-of-the-art models.
 
 This project consists of two components Document Retriever and Document Reader.
 
-### Document Retriever 
-
-To interactively query Wikipedia:
-
-### Document Reader
+### Document Retriever
 
 This project employs the classic non machine learning based information retrieval system equipped with two levels of filtering to build an effective information retrieval system that narrows the search space. 
 Firstly, Single stage Retriever extracts and ranks the top K Wikipedia Article titles where the span of answer for a given question might appear in the content of those Articles. 
