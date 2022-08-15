@@ -47,7 +47,7 @@ from transformers import BertModel, BertPreTrainedModel
 class Bert_QA(BertPreTrainedModel):
     '''
      *
-     *  Summary : This class loads and performs forward propagation.
+     *  Summary : This class loads the model and performs forward propagation.
      *
      *  Args    : Param - Pretrained BERT-base template from huggingface.
      *
@@ -57,13 +57,13 @@ class Bert_QA(BertPreTrainedModel):
     def __init__(self, config):
         '''
          *
-         *  Summary : This is the constructor class to initialise the model and additional of classification
+         *  Summary : This is the constructor class to initialise the model and adding a classification
                         layer at the end of last layer.
 
          *
          *  Args    : Param- BERT-config.
          *
-         *  Returns : BERT-base initialised for finetuning.
+         *  Returns : BERT-base initialised for fine-tuning.
          *
         '''
         super().__init__(config)
@@ -84,7 +84,7 @@ class Bert_QA(BertPreTrainedModel):
                                 start_positions of answer
                                 end_positions of answer
         *
-        *  Returns : BERT-base initialised for finetuning.
+        *  Returns : BERT-base initialised for fine-tuning.
         *
        '''
     def forward(
@@ -340,7 +340,7 @@ class Train_Validate:
     *  Summary : This function evaluates the best saved model after training on eval dataset
 
     *
-    *  Args    : Param-   evaluation dataset: SQUAD development set                    
+    *  Args    : Param- evaluation dataset: SQUAD development set                    
     *
     *  Returns : EM-Score and F1-Score
     *
@@ -389,8 +389,7 @@ if __name__ == '__main__':
     # setup the formate of the logger
     formatter = logging.Formatter('%(asctime)s %(message)s')
     # setup train_Eval logger
-    logger = setup_logger('logger',
-                          '/Users/shreyasarunesh/Desktop/Open_Domain_Question_Answering_Agent/Reader/model_output/BERT-TrainVal.log')
+    logger = setup_logger('logger', '../Reader_model_output/BERT-TrainVal.log')
 
     train_vali = Train_Validate()
 

@@ -90,7 +90,7 @@ class DrQA(nn.Module):
                     1. sets the two BiLSTM model for question and context.
                     2. calculates the gradient loss for both start and end logits.
      *
-     *  Args    : Param - context tensosr, context mask, 
+     *  Args    : Param - context tensor, context mask, 
                         question tensor, question mask, 
                         start_tensor, end_tensor
      *
