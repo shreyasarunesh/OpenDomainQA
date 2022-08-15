@@ -32,6 +32,9 @@ import torch
 from transformers import AutoTokenizer, BertTokenizerFast
 from tabulate import tabulate
 
+from Stemmer import Stemmer
+from nltk.corpus import stopwords
+
 # Define the bert tokenizer
 tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 

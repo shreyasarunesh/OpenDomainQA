@@ -27,6 +27,8 @@ import argparse
 import linecache
 from collections import Counter
 
+from Stemmer import Stemmer
+from nltk.corpus import stopwords
 '''
  *
  *  Summary : main class for retriever. Queries can be simple or field specific. Search query types:
