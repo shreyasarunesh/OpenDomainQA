@@ -37,6 +37,10 @@ The latest English Wikipedia dump can be found: [English Wikipedia Dump](https:/
 
 The SQuAD dataset can be downloaded: [SQuAD V 1.0 & V2.0](https://rajpurkar.github.io/SQuAD-explorer/)
 
+The Wikipedia Index and the trained models can be downloaded through this link: [Models and Indexing files](https://drive.google.com/drive/folders/1ZO7ZJ8N02HEm6bR_kj6LiBiR1_7loPMG?usp=sharing)
+Warning: The wikipedia Indexing file is ~ 22 GB
+
+
 The structure of DrQA model is as illustrated in the figure bellow and the BERT-base model can be found the Huggingface library: 
 [BERT-base-uncased](https://huggingface.co/bert-base-uncased)
 
